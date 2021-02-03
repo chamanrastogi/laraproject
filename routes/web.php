@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
+use App\Post;
 
 Auth::routes();
 
@@ -26,5 +26,5 @@ Route::get('/post/{post}', 'PostController@view')->name('post');
 Route::group(['middleware' => ['auth']], function () {
   
 Route::get('/admin', 'AdminController@index')->name('admin.index');  
-Route::resource('/admin/post', 'postController'); 
+Route::resource('/admin/post', 'PostController'); 
 });

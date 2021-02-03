@@ -3,24 +3,45 @@
 
 
     @section('content')
-   
+	<div class="box-content card white">
 		<h4 class="box-title">Add Post        
 			
 			
 			<div style="float:right">
-			<a href="{{url('admin/posts','')}}">	
+			<a href="{{url('admin/post','')}}">	
 				Show Post          </a>	
 			 </div>
-			</h4>
+            </h4>
+          
 		<!-- /.box-title -->
 		<div class="card-content">
+            @if(session()->has('type'))				  
 			
-				{!! Form::open(['url' => '/processform', 'class' => 'form-horizontal']) !!}
-			
+			<div class="alert alert-{{@session('type')}}" role="alert">			
+				{{@session('msg')}}			
+			  </div>
+			  @endif
+			@if(count($errors)>0)
+
+		  <div class="alert alert-danger" role="alert">	
+			  <ul>
+				  @foreach($errors->all() as $er)
+				  <li>{{$er}}</li>
+				  @endforeach
+			  </ul>
+
+		  </div>
+		  @endif
+				{!! Form::open([
+					'method' => 'put',
+					'route' => ['post.update',$data->id],
+					'class' => 'form-horizontal',
+					'files'=>true
+				]) !!}
 				<div class="form-group">
 					{!! Form::label('title', 'Post Title:', ['class' => 'col-md-2 control-label']) !!}
 					<div class="col-lg-10">
-						{!! Form::text('title', $value = null, ['class' => 'form-control', 'placeholder' => 'Post Title']) !!}
+						{!! Form::text('title', $value = $data->title, ['class' => 'form-control', 'placeholder' => 'Post Title']) !!}
 					</div>
 				</div>
 				<div class="form-group">
@@ -32,7 +53,7 @@
 				<div class="form-group">
 					{!! Form::label('body', 'Post Text:', ['class' => 'col-md-2 control-label']) !!}
 					<div class="col-lg-10">
-						{!! Form::textarea('post_image', $value = null, ['class' => 'form-control', 'placeholder' => 'Post Body']) !!}
+						{!! Form::textarea('body', $value =  $data->body, ['class' => 'form-control', 'placeholder' => 'Post Body']) !!}
 					</div>
 				</div>
 				<div class="form-group col-md-12 text-right">
@@ -42,7 +63,7 @@
 				{!! Form::close()  !!}
 	
 			</div>
-
+		</div>
 					<!-- /.card-content -->
     @endsection
     </x-admin-master>

@@ -16,7 +16,7 @@
           <p>
               <span class="glyphicon glyphicon-time"></span> Posted on {{($post->created_at->diffForHumans())}}</p>
           <hr>
-          <img src="http://placehold.it/750x300" class="img-responsive">
+          <img src="{{$post->image_path()}}" class="img-responsive">
           <hr>
           <p class="lead"> {{$post->body}}</p>
          

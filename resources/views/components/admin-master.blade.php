@@ -26,6 +26,7 @@
 
 	<!-- Sweet Alert -->
 	<link rel="stylesheet" href="{{asset('admin_asset/assets/plugin/sweet-alert/sweetalert.css')}}">
+	@yield('css')
 	
 </head>
 
@@ -47,8 +48,8 @@
 
 <div class="fixed-navbar">
 	<div class="pull-left">
-		<button type="button" class="menu-mobile-button fas fa-bars js__menu_mobile"></button>
-		<h1 class="page-title">Form elements</h1>
+		<button type="button" class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>
+		
 		<!-- /.page-title -->
 	</div>
 	<!-- /.float-left -->
@@ -241,9 +242,9 @@
 		<div class="row small-spacing">
 			
 			<div class="col-12">
-				<div class="box-content card white">
+				
 					@yield('content')
-				</div>
+				
 				<!-- /.box-content -->
 			</div>
 			<!-- /.col-12 -->
@@ -277,9 +278,8 @@
 	<!-- Sparkline Chart -->
 	<script src="{{asset('admin_asset/assets/plugin/chart/sparkline/jquery.sparkline.min.js')}}"></script>
 	<script src="{{asset('admin_asset/assets/scripts/chart.sparkline.init.min.js')}}"></script>
+	@yield('script')
 
-	<script src="{{asset('admin_asset/assets/scripts/main.min.js')}}"></script>
-<script src="{{asset('admin_asset/assets/scripts/mycommon.js')}}"></script>
 </body>
 
 
