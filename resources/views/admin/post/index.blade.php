@@ -3,9 +3,9 @@
 @section('css')
 	<!-- Data Tables -->
 	<link rel="stylesheet" href="{{asset('admin_asset/assets/plugin/datatables/media/css/dataTables.bootstrap.min.css')}}">
-	<link rel="stylesheet" href="{{asset('assets/plugin/datatables/extensions/Responsive/css/responsive.bootstrap.min.css')}}">
-	<link rel="stylesheet" href="{{asset('assets/plugin/datatables/media/css/buttons.dataTables.min.css')}}">
-
+	<link rel="stylesheet" href="{{asset('admin_asset/assets/plugin/datatables/extensions/Responsive/css/responsive.bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('admin_asset/assets/plugin/datatables/media/css/buttons.dataTables.min.css')}}">
+	<link rel="stylesheet" href="{{asset('admin_asset/assets/plugin/lightview/css/lightview/lightview.css')}}">
 @endsection
 
 	@section('content')
@@ -47,12 +47,13 @@
 					<td>{{$m->id}}</td>
 					<td>{{$m->user->name}}</td>
 					<td>{{$m->title}}</td>
-					<td><img src="{{$m->image_path()}}" style="width:100px;"/></td>
+					<td><div style="width:250px"> <a class="item-gallery lightview " data-lightview-group="group" href="{{ $m->image_path()}}">
+						<img src="{{ $m->image_path()}}" class="img-responsive"></a></div></td>
 					
 					<td>{{$m->created_at->diffForHumans()}}</td>
 					<td>{{$m->updated_at->diffForHumans()}}</td>
 					<td>
-						<a href="{{route('post.edit',$r->id)}}" class="btn btn-info btn-circle btn-xs waves-effect waves-light">
+						<a href="{{route('post.edit',$m->id)}}" class="btn btn-info btn-circle btn-xs waves-effect waves-light">
 							<i class="ico fa fa-pencil "></i></a>							
 						
 						{!! Form::open([
@@ -87,6 +88,7 @@
 <script src="{{asset('admin_asset/assets/plugin/datatables/media/js/buttons.html5.min.js')}}"></script>
 <script src="{{asset('admin_asset/assets/plugin/datatables/media/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('admin_asset/assets/scripts/datatables.demo.min.js')}}"></script>
+<script src="{{asset('admin_asset/assets/plugin/lightview/js/lightview/lightview.js')}}"></script>
 	@endsection
     </x-admin-master>
     

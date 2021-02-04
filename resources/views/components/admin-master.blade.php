@@ -13,7 +13,7 @@
 
 	<!-- Main Styles -->
 	<link rel="stylesheet" href="{{asset('admin_asset/assets/styles/style.min.css')}}">
-	<link rel="stylesheet" href="{{asset('admin_asset/assets/styles/custom.css')}}">
+	
 	
 	<!-- Themify Icon -->
 	<link rel="stylesheet" href="{{asset('admin_asset/assets/fonts/themify-icons/themify-icons.css')}}">
@@ -33,7 +33,7 @@
 <body>
 <div class="main-menu">
 	<header class="header">
-		<a href="{{url('/')}}" class="logo"><i class="ico ti-rocket"></i>Admin Panel</a>
+		<a href="{{url('/admin')}}" class="logo"><i class="ico ti-rocket"></i>Admin Panel</a>
 		<button type="button" class="button-close fa fa-times js__menu_close"></button>
 	</header>
 	<!-- /.header -->
@@ -278,6 +278,9 @@
 	<!-- Sparkline Chart -->
 	<script src="{{asset('admin_asset/assets/plugin/chart/sparkline/jquery.sparkline.min.js')}}"></script>
 	<script src="{{asset('admin_asset/assets/scripts/chart.sparkline.init.min.js')}}"></script>
+	
+	<script src="{{asset('admin_asset/assets/scripts/form.demo.min.js')}}"></script>
+	<script src="{{asset('admin_asset/assets/scripts/main.min.js')}}"></script>
 	@yield('script')
 
 </body>

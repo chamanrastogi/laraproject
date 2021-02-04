@@ -1,7 +1,12 @@
 
 <x-admin-master title="Admin Panel">
 
-
+	@section('css')
+	<!-- Data Tables -->
+		
+	<link rel="stylesheet" href="{{asset('admin_asset/assets/plugin/lightview/css/lightview/lightview.css')}}">
+	
+@endsection
     @section('content')
 	<div class="box-content card white">
 		<h4 class="box-title">Add Post        
@@ -33,7 +38,7 @@
 		  </div>
 		  @endif
 				{!! Form::open([
-					'method' => 'put',
+					'method' => 'patch',
 					'route' => ['post.update',$data->id],
 					'class' => 'form-horizontal',
 					'files'=>true
@@ -45,8 +50,12 @@
 					</div>
 				</div>
 				<div class="form-group">
+					
 					{!! Form::label('post_image', 'Post Image:', ['class' => 'col-md-2 control-label']) !!}
 					<div class="col-lg-10">
+						
+						<div style="width:250px"> <a class="item-gallery lightview " data-lightview-group="group" href="{{ $data->image_path()}}">
+							<img src="{{ $data->image_path()}}" class="img-responsive"></a></div>
 						{!! Form::file('post_image', ['class' => 'form-control']) !!}
 					</div>
 				</div>
@@ -65,6 +74,9 @@
 			</div>
 		</div>
 					<!-- /.card-content -->
-    @endsection
+	@endsection
+	@section('script')
+	<script src="{{asset('admin_asset/assets/plugin/lightview/js/lightview/lightview.js')}}"></script>
+	@endsection
     </x-admin-master>
     

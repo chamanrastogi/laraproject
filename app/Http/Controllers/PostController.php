@@ -13,9 +13,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $result= Post::all();
+       // $post=auth()->user()->posts;
+       // dd($post);
+       $post= Post::all();
         
-        return view('admin.post.index',['data'=>$result]);
+        return view('admin.post.index',['data'=>$post]);
     }
 
     /**
@@ -92,7 +94,7 @@ if($pp)
     public function edit(Post $post)
     {
         
-        
+        $this->authorize('view',$post);
         return view('admin.post.edit',['data'=>$post]);
     }
 
@@ -105,34 +107,37 @@ if($pp)
      */
     public function update(Request $r, $id)
     {
-        $r->validate([
+        $inputs=$r->validate([
             'title'=>'required|min:8|max:255',                
             'body'=>'required'
              ]);
+             $post=Post::findOrFail($id);  
         if($file=$r->file('post_image'))
         {
+            
     $image=$r->file('post_image');
     $ext=$image->extension();
-    $file=time().'.'.$ext;     
-    $image->storeAs('public/post',$file);
+    $file=time().'.'.$ext;       
+    $inputs['post_image']=$image->storeAs('public/post',$file);
+    $post->post_image=$file;  
       }
      
-        $data=Post::findOrFail($id);       
-        $data->user_id=auth()->user()->id;    
-        $data->title=$r->title; 
-        $data->post_image=$file;      
-        $data->body=$r->body;       
-        $pp=$data->save();       
+             
+      
+        $post->title=$inputs['title'];           
+        $post->body=$inputs['body'];   
+        $this->authorize('update',$post);      
+        $pp=$post->save();       
 if($pp)
 {
     $r->session()->flash('type',"success");
     $r->session()->flash('msg',"Post id: ".$id." Successfully Updated");
-    return redirect()->route('post.update',$id);
+    return redirect()->route('post.edit',$id);
 }else
 {
     $r->session()->flash('type',"danger");
     $r->session()->flash('msg',"Error in Updating Post");  
-    return redirect()->route('post.update',$id);
+    return redirect()->route('post.edit',$id);
 }
 
     }
