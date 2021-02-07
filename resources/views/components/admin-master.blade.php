@@ -62,7 +62,26 @@
 		<!-- /.ico-item -->
 		<a href="#" class="ico-item ti-email notice-alarm js__toggle_open" data-target="#message-popup"></a>
 		<a href="#" class="ico-item ti-bell notice-alarm js__toggle_open" data-target="#notification-popup"></a>
-		
+		<div class="ico-item">
+			<i class="ti-user"></i>   {{ ucfirst(Auth::user()->name) }}
+			<ul class="sub-ico-item">
+				<li><a href="#">Settings</a></li>
+				<li>
+					<a class="logout" href="{{ route('logout') }}"
+					onclick="event.preventDefault();
+								  document.getElementById('logout-form').submit();">
+					 {{ __('Logout') }}
+				 </a>
+
+				 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+					 @csrf
+				 </form>	
+				
+				
+				</li>
+			</ul>
+			<!-- /.sub-ico-item -->
+		</div>
 	</div>
 	<!-- /.float-right -->
 </div>

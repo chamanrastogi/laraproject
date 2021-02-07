@@ -12,11 +12,13 @@
                 <!-- /.box-title -->
                 
                 <!-- /.dropdown js__dropdown -->
-                 
+                 @if (auth()->user()->userHasRole('Admins'))
+                     
+               
                 <br><br>
                 <h1 class="text-center" >-</h1>
-                 <center class="animated wow bounceIn"></center><br>
-             
+                 <center class="animated wow bounceIn">Admin</center><br>
+                 @endif
                 <!-- /#svg-animation-chartist-chart.chartist-chart -->
             </div>
             <!-- /.box-content -->

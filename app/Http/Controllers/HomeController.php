@@ -23,7 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $post=Post::all();
+        $post=Post::paginate(5);
         return view('home',['data'=>$post]);
     }
+    
 }

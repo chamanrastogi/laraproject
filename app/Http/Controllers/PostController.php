@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Post;
 class PostController extends Controller
 {
@@ -13,9 +14,11 @@ class PostController extends Controller
      */
     public function index()
     {
-       // $post=auth()->user()->posts;
-       // dd($post);
-       $post= Post::all();
+      // $post= auth()->user()->posts()->paginate(5);
+       
+    //   dd($post);
+       $post=Post::all(); 
+        
         
         return view('admin.post.index',['data'=>$post]);
     }
@@ -38,6 +41,7 @@ class PostController extends Controller
      */
     public function store(Request $r)
     {
+      //  $this->authorize('store',Post::class);
         $r->validate([
             'title'=>'required|min:8|max:255',           
             'post_image'=>'required|mimes:jpeg,gif,png',
@@ -107,11 +111,13 @@ if($pp)
      */
     public function update(Request $r, $id)
     {
+        $post=Post::findOrFail($id);  
+        $this->authorize('update',$post);
         $inputs=$r->validate([
             'title'=>'required|min:8|max:255',                
             'body'=>'required'
              ]);
-             $post=Post::findOrFail($id);  
+             
         if($file=$r->file('post_image'))
         {
             
@@ -150,8 +156,11 @@ if($pp)
      */
     public function destroy($id)
     {
+        
+       
            //
            $data= Post::find($id);
+           $this->authorize('delete',$data);
            $pp=$data->delete();
            if($pp)
    {

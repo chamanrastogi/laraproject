@@ -1,77 +1,58 @@
-@extends('layouts.app')
+<x-admin-login-master title="Admin Panel">
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+
+ <form method="POST" class="frm-single" action="{{ route('register') }}">
                         @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
+		<div class="inside">
+			<div class="title"><strong>Admin</strong> Panel</div>
+			<!-- /.title -->
+			<div class="frm-title">Login</div>
+			<!-- /.frm-title -->
+			<div class="frm-input"><input type="text"  name="name" placeholder="name" class="frm-inp @error('name') is-invalid @enderror"><i class="fa fa-user frm-ico"></i>
+			 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
+								</div>
+			
+			<div class="frm-input"><input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Email Address" class="frm-inp @error('email') is-invalid @enderror" required autocomplete="email" autofocus><i class="fa fa-envelope frm-ico"></i>
+			
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
+			</div>
+			<!-- /.frm-input -->
+			<div class="frm-input"><input id="password" name="password"  type="password" placeholder="Password" class="frm-inp @error('password') is-invalid @enderror" required autocomplete="current-password"><i class="fa fa-lock frm-ico"></i>
+			  @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                        </div>
+			</div>
+			<div class="frm-input"><input id="password-confirm" name="password_confirmation"  type="password" placeholder="Confirm Password" class="frm-inp" required autocomplete="new-password"><i class="fa fa-lock frm-ico"></i>
+			 
+			</div>
+			
+			<button type="submit" class="frm-submit">  {{ __('Register') }}<i class="fa fa-arrow-circle-right"></i></button>
+			<div class="row small-spacing">
+				<div class="col-md-12">
+					<div class="txt-login-with txt-center">or login with</div>
+					<!-- /.txt-login-with -->
+				</div>
+				
+			</div>
+			<!-- /.row -->
+			<a href="{{ route('login') }}" class="a-link"><i class="fa fa-key"></i>Login.</a>
+			<div class="frm-footer">Copyright © {{config('app.name')}} © {{date('Y')}}.</div>
+			<!-- /.footer -->
+		</div>
+		<!-- .inside -->
+	</form>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
+   </x-admin-login-master>

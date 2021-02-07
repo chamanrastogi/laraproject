@@ -19,12 +19,12 @@ use App\Post;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-
+Route::get('/logout', 'HomeController@index')->name('logout');  
 
 Route::get('/post/{post}', 'PostController@view')->name('post');
 
 Route::group(['middleware' => ['auth']], function () {
-  
+
 Route::get('/admin', 'AdminController@index')->name('admin.index');  
 Route::resource('/admin/post', 'PostController'); 
 });

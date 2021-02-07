@@ -46,7 +46,7 @@
 				<tr>
 					<td>{{$m->id}}</td>
 					<td>{{$m->user->name}}</td>
-					<td>{{$m->title}}</td>
+					<td><a href="{{route('post.edit',$m->id)}}">{{$m->title}}</a></td>
 					<td><div style="width:250px"> <a class="item-gallery lightview " data-lightview-group="group" href="{{ $m->image_path()}}">
 						<img src="{{ $m->image_path()}}" class="img-responsive"></a></div></td>
 					
