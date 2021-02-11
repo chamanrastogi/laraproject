@@ -8,8 +8,15 @@
 		<div class="inside">
 			<div class="title"><strong>Admin</strong> Panel</div>
 			<!-- /.title -->
-			<div class="frm-title">Login</div>
+			<div class="frm-title">Register</div>
 			<!-- /.frm-title -->
+			<div class="frm-input"><input type="text"  name="username" placeholder="Username" class="frm-inp @error('username') is-invalid @enderror"><i class="fa fa-user frm-ico"></i>
+				@error('name')
+									   <span class="invalid-feedback" role="alert">
+										   <strong>{{ $message }}</strong>
+									   </span>
+								   @enderror
+								   </div>
 			<div class="frm-input"><input type="text"  name="name" placeholder="name" class="frm-inp @error('name') is-invalid @enderror"><i class="fa fa-user frm-ico"></i>
 			 @error('name')
                                     <span class="invalid-feedback" role="alert">

@@ -63,8 +63,12 @@
 		<a href="#" class="ico-item ti-email notice-alarm js__toggle_open" data-target="#message-popup"></a>
 		<a href="#" class="ico-item ti-bell notice-alarm js__toggle_open" data-target="#notification-popup"></a>
 		<div class="ico-item">
-			<i class="ti-user"></i>   {{ ucfirst(Auth::user()->name) }}
+			<i class="ti-user"></i>  
+			@if(Auth::check())
+			{{ ucfirst(Auth::user()->name) }}
+			@endif
 			<ul class="sub-ico-item">
+				<li><a href="{{route('user.profile.show',Auth::user())}}">Profile</a></li>
 				<li><a href="#">Settings</a></li>
 				<li>
 					<a class="logout" href="{{ route('logout') }}"
@@ -72,10 +76,13 @@
 								  document.getElementById('logout-form').submit();">
 					 {{ __('Logout') }}
 				 </a>
-
-				 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-					 @csrf
-				 </form>	
+				 {!! Form::open([
+					'method' => 'Post',
+					'route' => ['logout'],
+					'id' => 'logout-form'
+				]) !!}
+				
+					 {!! Form::close()  !!}
 				
 				
 				</li>

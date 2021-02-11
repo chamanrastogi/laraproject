@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Post;
+use App\User;
 
 Auth::routes();
 
@@ -25,6 +26,9 @@ Route::get('/post/{post}', 'PostController@view')->name('post');
 
 Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/admin', 'AdminController@index')->name('admin.index');  
+Route::get('/admin', 'AdminController@index')->name('admin.index');   
 Route::resource('/admin/post', 'PostController'); 
+Route::get('/admin/users/{user}/profile', 'UserController@show')->name('user.profile.show'); 
+Route::get('/admin/users/create', 'UserController@create')->name('user.profile.create');
+Route::put('/admin/users/{user}/update', 'UserController@update')->name('user.profile.update');
 });

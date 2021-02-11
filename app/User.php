@@ -5,18 +5,19 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
+    public $folder="user";
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'name', 'avatar','email', 'password',
     ];
 
     /**
@@ -51,6 +52,15 @@ class User extends Authenticatable
           return $this->belongsToMany(Permission::class);
        
     }
+    public function setPasswordAttribute($value)
+        {
+            $this->attributes['password']= bcrypt($value);
+        }
+        public function image_path()
+        {
+            return url(Storage::url($this->folder.'/'.$this->avatar));
+        }
+    
     public function userHasRole($role_name)
     {
         foreach($this->roles as $role)

@@ -10,9 +10,10 @@
 			<!-- /.title -->
 			<div class="frm-title">Login</div>
 			<!-- /.frm-title -->
-			<div class="frm-input"><input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Username" class="frm-inp @error('email') is-invalid @enderror" required autocomplete="email" autofocus><i class="fa fa-user frm-ico"></i>
+			<div class="frm-input">
+				<input type="text" name="username" id="username" value="{{ old('username') }}" placeholder="Username" class="frm-inp @error('username') is-invalid @enderror" required autocomplete="username" autofocus><i class="fa fa-user frm-ico"></i>
 			
-                                @error('email')
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
