@@ -31,4 +31,6 @@ Route::resource('/admin/post', 'PostController');
 Route::get('/admin/users/{user}/profile', 'UserController@show')->name('user.profile.show'); 
 Route::get('/admin/users/create', 'UserController@create')->name('user.profile.create');
 Route::put('/admin/users/{user}/update', 'UserController@update')->name('user.profile.update');
+Route::get('/admin/users', 'UserController@index')->name('user.index');
+Route::delete('/admin/users/{user}/destory', 'UserController@destory')->name('user.destory');
 });

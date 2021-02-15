@@ -9,7 +9,7 @@
 @endsection
     @section('content')
 	<div class="box-content card white">
-		<h4 class="box-title">Add Post        
+		<h4 class="box-title">Edit Post        
 			
 			
 			<div style="float:right">

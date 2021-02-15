@@ -9,6 +9,11 @@ use App\User;
 class UserController extends Controller
 {
     //
+    public function index()
+    {
+        $user=User::all();
+        return view('admin.users.index',['user'=>$user]);
+    }
     public function show(User $user){
        // dd($user);
          return view('admin.users.profile',['user'=>$user]);
@@ -23,9 +28,10 @@ class UserController extends Controller
       $r->validate([
          'username'=>'required|min:8|max:255', 
          'name'=>'required|min:8|max:255', 
-         'avatar'=>'mimes:jpeg,gif,png',            
-         'email'=>'required|email|min:8|max:255|unique:users'
-         
+         'email'=>'required|max:255|email', 
+         'avatar'=>'mimes:jpeg,gif,png',
+         'password'=>'required|min:6|max:12|confirmed',          
+               
           ]);
       $user=User::findOrFail($id); 
   
@@ -59,4 +65,23 @@ if($pp)
     return redirect()->route('user.profile.show',$id);
 }
      }
+     public function destory(User $user)
+    {
+           //
+         
+           $pp=$user->delete();
+           if($pp)
+   {
+       session()->flash('type',"danger");
+       session()->flash('msg',"User id: ".$user->id."  Deleted Successfully");
+       return redirect()->route('user.index');
+   }else
+   {
+       session()->flash('type',"warning");
+       session()->flash('msg',"Error in Deleting User Id:".$user->id);  
+      return redirect()->route('user.index');
+   }
+       
+    }
+     
 }
