@@ -1,6 +1,10 @@
 
 <x-admin-master title="Admin Panel">
+	@section('css')
+	<!-- Select 2 -->
+	<link rel="stylesheet" href="{{asset('admin_asset/assets/plugin/select2/css/select2.min.css')}}">
 
+@endsection
 
     @section('content')
 	<div class="box-content card white">
@@ -71,8 +75,16 @@
 						{!! Form::password('password',  ['class' => 'form-control', 'placeholder' => 'Password']) !!}
 					</div>
 				</div>
+				<div class="form-group">
+					{!! Form::label('role', 'Roles:', ['class' => 'col-md-2 control-label']) !!}
+					<div class="col-lg-10">
+				
+						{!! Form::select('roles[]', $roles, $myrole, ['multiple'=>'multiple','class'=>'form-control select2_1 '])!!}
+					</div>
+				</div>
+				
 				<div class="form-group col-md-12 text-right">
-					{!! Form::submit('Submit', ['class' => 'btn btn-primary btn-sm waves-effect waves-light'] ) !!}
+					{!! Form::submit('Update', ['class' => 'btn btn-primary btn-sm waves-effect waves-light'] ) !!}
 					{!! Form::reset('Reset', ['class' => 'btn btn-info btn-sm waves-effect waves-light'] ) !!}
 				</div>
 				{!! Form::close()  !!}
@@ -81,6 +93,14 @@
 		</div>
 					<!-- /.card-content -->
 	@endsection
+	@section('script')
+	<!--  BEGIN CUSTOM SCRIPTS FILE  -->
+	<script src="{{asset('admin_asset/assets/plugin/multiselect/multiselect.min.js')}}"></script>
+	<script src="{{asset('admin_asset/assets/plugin/select2/js/select2.min.js')}}"></script>
+
+	<script src="{{asset('admin_asset/assets/scripts/form.demo.min.js')}}"></script>
+	<script src="{{asset('admin_asset/assets/scripts/mycommon.js')}}"></script>
 	
+@endsection
     </x-admin-master>
     

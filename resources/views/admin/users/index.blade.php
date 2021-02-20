@@ -32,6 +32,7 @@
                 <thead>
                     <tr>
                         <th>Id</th>
+                        <th>User Roles</th>
                         <th>User Name</th>
                         <th>Email</th>		
                         <th>Image</th>					
@@ -43,8 +44,14 @@
                 
                 <tbody>
                     @foreach ($user as $key=>$m)
+                    <?php
+                    $x=$m->roles->pluck('name')->toArray();
+                    $xs=implode(",",$x);
+                  // dd($xs);
+                    ?>
                     <tr>
                         <td>{{$m->id}}</td>
+                        <td>{{$xs}}</td>
                         <td>{{$m->name}}</td>
                         <td>{{$m->email}}</td>
                         <td><div style="width:250px"> <a class="item-gallery lightview " data-lightview-group="group" href="{{ $m->image_path()}}">
@@ -53,18 +60,24 @@
                         <td>{{$m->created_at->diffForHumans()}}</td>
                         <td>{{$m->updated_at->diffForHumans()}}</td>
                         <td>
-                            <a href="{{route('user.profile.show',$m->id)}}" class="btn btn-info btn-circle btn-xs waves-effect waves-light">
-                                <i class="ico fa fa-pencil "></i></a>							
-                            
-                            {!! Form::open([
-                                'method' => 'DELETE',
+                           
+
+                            <ul class="list-inline">
+                                <a href="{{route('user.profile.show',$m->id)}}" class="btn btn-info btn-circle btn-xs waves-effect waves-light">
+                                    <i class="ico fa fa-pencil "></i></a>								
+                                    <li>
+                                {!! Form::open([
+                                   'method' => 'DELETE',
                                 'route' => ['user.destory', $m->id],
                                 'class' => 'form-horizontal'
-                            ]) !!}
-                            
-                            {{ method_field('DELETE') }}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-circle btn-xs waves-effect waves-light ico fa fa-trash'] ) !!}
-                            {!! Form::close()  !!}
+                                ]) !!}
+                                
+                                {{ method_field('DELETE') }}
+                                {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-circle btn-xs waves-effect waves-light'] ) 
+                                !!}
+                                {!! Form::close()  !!}
+                            </li>
+                                </ul>
                         </td>
                     </tr>
                 @endforeach

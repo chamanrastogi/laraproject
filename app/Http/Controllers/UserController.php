@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\User;
+use App\Role;
 class UserController extends Controller
 {
     //
@@ -15,13 +16,17 @@ class UserController extends Controller
         return view('admin.users.index',['user'=>$user]);
     }
     public function show(User $user){
-       // dd($user);
-         return view('admin.users.profile',['user'=>$user]);
+        $roleall = Role::all(); 
+        $myroles =  $user->roles->pluck('id')->toArray();
+        $roles=array('' => 'Select Roles') + $roleall->pluck('name', 'id')->toArray();        
+         return view('admin.users.profile',['user'=>$user,'roles'=>$roles,'myrole'=>$myroles]);
      }
      
     public function create()
      {
-        return view('admin.users.create');
+         $roleall = Role::all();
+         $roles= $roleall->pluck('name', 'id')->toArray();
+        return view('admin.users.create',['roles'=>$roles]);
      }
      public function update(Request $r, $id)
      {
@@ -29,14 +34,14 @@ class UserController extends Controller
          'username'=>'required|min:8|max:255', 
          'name'=>'required|min:8|max:255', 
          'email'=>'required|max:255|email', 
-         'avatar'=>'mimes:jpeg,gif,png',
-         'password'=>'required|min:6|max:12|confirmed',          
+         'avatar'=>'mimes:jpeg,gif,png'            
                
           ]);
       $user=User::findOrFail($id); 
   
          // dd( $r->file('avatar'));
-
+         //dd($r->post('roles'));
+         
         
           if($file=$r->file('avatar'))
           {  
@@ -52,7 +57,34 @@ class UserController extends Controller
         $user->name=$r->name;   
         $user->email=$r->email; 
         $user->password=$r->password; 
-        $pp=$user->save();       
+        
+        if($r->roles=='')
+        {
+            $y=$user->roles()->get()->first(); 
+            //dd($y->id);
+            $user->roles()->Detach($y->id);  
+        }else
+        {
+        $rol=Role::all();  
+        //dd($rol);
+      
+        $y=$user->roles()->get()->pluck('id')->toarray();         
+       
+        foreach($rol as $key=>$role)
+        { 
+         if((!in_array($role->id,$y)) && (in_array($role->id,$r->roles))  )
+        {
+         //  dd($role->name);
+          $user->roles()->attach($role->id); 
+        } else if((in_array($role->id,$y)) && (!in_array($role->id,$r->roles))  )
+        {   // dd($role->name);          
+           $user->roles()->Detach($role->id);
+        }
+    }
+        }
+       
+      
+       $pp=$user->save();       
 if($pp)
 {
     $r->session()->flash('type',"success");

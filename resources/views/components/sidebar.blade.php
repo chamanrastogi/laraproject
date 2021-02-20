@@ -10,6 +10,8 @@
    
         @if(auth()->user()->userHasRole('Admin'))
         <x-admin.sidebar.admin-sidebar-user></x-admin-sidebar-user>
+        <x-admin.sidebar.admin-sidebar-role></x-admin-sidebar-role>
+            <x-admin.sidebar.admin-sidebar-permission></x-admin-sidebar-permission>
         @endif
     </ul>
    

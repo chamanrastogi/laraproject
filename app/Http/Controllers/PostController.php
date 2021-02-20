@@ -43,7 +43,7 @@ class PostController extends Controller
     {
       //  $this->authorize('store',Post::class);
         $r->validate([
-            'title'=>'required|min:8|max:255',           
+            'title'=>'required|min:8|max:255|unique:posts',           
             'post_image'=>'required|mimes:jpeg,gif,png',
             'body'=>'required'
              ]);
