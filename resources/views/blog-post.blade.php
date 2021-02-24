@@ -18,7 +18,7 @@
           <hr>
           <img src="{{$post->image_path()}}" class="img-responsive">
           <hr>
-          <p class="lead"> {{$post->body}}</p>
+          <p class="lead"> <?php echo $post->body; ?></p>
          
 
           <hr>

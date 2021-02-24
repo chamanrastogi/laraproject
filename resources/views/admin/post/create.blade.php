@@ -52,7 +52,7 @@
 				<div class="form-group">
 					{!! Form::label('body', 'Post Text:', ['class' => 'col-md-2 control-label']) !!}
 					<div class="col-lg-10">
-						{!! Form::textarea('body', $value = null, ['class' => 'form-control', 'placeholder' => 'Post Body']) !!}
+						{!! Form::textarea('body', $value = null, ['class' => 'form-control','id' => 'demotest', 'placeholder' => 'Post Body']) !!}
 					</div>
 				</div>
 				<div class="form-group col-md-12 text-right">
@@ -64,6 +64,22 @@
 			</div>
 		</div>
 					<!-- /.card-content -->
-    @endsection
+  @endsection
+	@section('script')
+
+	<script src="{{asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+	<script src="{{asset('/vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
+	
+	<script>
+
+			
+		CKEDITOR.replace('demotest', {    filebrowserBrowseUrl :  '/elfinder/ckeditor',});
+		
+		
+				</script>
+			
+	@endsection
     </x-admin-master>
+    
+    
     
